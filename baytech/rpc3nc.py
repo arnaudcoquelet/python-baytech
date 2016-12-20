@@ -54,6 +54,8 @@ class RPC3_NC(object):
         if raw_status is None:
             return status
 
+        raw_status = raw_status.decode("utf-8")
+
         _LOGGER.debug('Raw Status:\n%s' % ( raw_status ) )
 
         #AveragePower

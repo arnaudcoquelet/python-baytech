@@ -5,13 +5,19 @@ Control Baytech devices with Python 3. Currently supports the RPC3-NC PDU via te
 ## Usage
 
 ```python
-from baytech.rpc3-nc import RPC3_NC
+import baytech.rpc3nc as rpc3nc
 
-hosts = discover() # Discover devices on your local network.
-s20 = S20("x.x.x.x") # Use a discovered host, or supply a known host.
-print(s20.on) # Current state (True = ON, False = OFF).
-s20.on = True # Turn it on.
-s20.on = False # Turn it off.
+HOST = "192.168.0.10"
+command_prompt = b'>'
+timeout = 60
+
+tn = rpc3nc.RPC3_NC(HOST, timeout= timeout, command_prompt= command_prompt)
+tn.connect()
+tn.turnOn(4)
+status = tn.getStatus()
+tn.close()
+
+print 'Baytech: %s' % (status)
 ```
 
 ## Contributions
